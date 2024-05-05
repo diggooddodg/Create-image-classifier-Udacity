@@ -2,7 +2,7 @@
 Purpose: To build an image classifier that will predict flower types using PyTorch. This was done for Udacity's AI Programming with Python Nanodegree.
 
 ## Part 1 - Jupyter notebook
-The whole trainng and prediction workflow is contained in the Jupyter Notebook.
+The full trainng and prediction workflow is contained in the Jupyter Notebook. The command line app in part 2 uses code developed in this notebook.
 
 ## Part 2 - Comand line app
 There are 2 python executables for the command line app, one for training and one for prediction. These executables use modules from 5 additional files as described below. 
