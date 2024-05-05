@@ -10,11 +10,11 @@ There are 2 python executables for the command line app, one for training and on
 ### Training
 train.py can be executed to build and train the image classifier 
 ##### Mandatory argument
-The user will need to specify one mandatory argument 'data_dir' contating the path to the training data directory as str. 
+The user will need to specify one mandatory argument 'data_directory' contating the path to the training data directory. 
 ##### Optional arguments:
---save_dir: the saving directory. Default is 'save_directory/'.  
+--data_directory: the saving directory. Default is 'save_directory/'.  
 --arch: the user can choose which architecture to use for the neural network. The default architecture is vgg13.  
---learning_r: sets the Learning rate for gradient descent: default is 0.01.  
+--learning_rate: sets the learning rate for gradient descent: default is 0.01.  
 --hidden_units: an int specifying how many neurons an extra hidden-layer will contain if so chosen. Default is 512.  
 --epochs: specifies the number of epochs as integer. Set to 20 by default.  
 
@@ -28,7 +28,7 @@ The user will need to specify the the path to the input image and the checkpoint
 --GPU: Allows the user to specifify GPU = True if a GPU is available. Default is GPU = True.  
 
 ### Additional files
-train.py and predict.py use modules where necessary from the following files:  
+train.py and predict.py use modules from the following files:  
 * get_input_args.py contains modules to accept inputs from the user via the command line.  
 * prepare_data.py contains modules for preparing training and validation data and preparation for the image to be predicted.  
 * classifier.py contains modules to build and train the model and run a prediction.  
