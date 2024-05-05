@@ -1,8 +1,10 @@
-Create-your-own-image-classifier
-Building a flower classifier for Udacity's AI Programming with Python Nanodegree utilising pythorch.
+# Udacity AI with Python project: Create-your-own-image-classifier
+Purpose: To build an image classifier that will predict flower types for Udacity's AI Programming with Python Nanodegree utilising pythorch.
 
+## Part 1 - Jupyter notebook
 The whole workflow is contained in this Jupyter Notebook.
 
+## Part 2 - Comand line app
 There are 2 python executables:
 
 train.py (https://github.com/bsassoli/Create-your-own-image-classifier/blob/master/predict.py)
