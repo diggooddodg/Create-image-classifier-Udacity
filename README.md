@@ -5,11 +5,11 @@ Purpose: To build an image classifier that will predict flower types using PyTor
 The whole trainng and prediction workflow is contained in the Jupyter Notebook.
 
 ## Part 2 - Comand line app
-There are 2 python executables for the command line app, one for training and one for prediction. These executables use modules from the 5 additional files. 
+There are 2 python executables for the command line app, one for training and one for prediction. These executables use modules from 5 additional files as described below. 
 
 ### Training
-train.py can be executed to build and train the image classifier
-Mandatory argument:
+train.py can be executed to build and train the image classifier /n
+Mandatory argument: \n
 The user will need to specify one mandatory argument 'data_dir' contating the path to the training data directory as str. 
 Optional arguments:
 --save_dir: the saving directory.
