@@ -29,8 +29,8 @@ The user will need to specify the the path to the input image and the checkpoint
 
 ### Additional files
 train.py and predict.py use modules where necessary from the following files:  
-get_input_args.py contains modules to accept inputs from the user via the command line.  
-prepare_data.py contains modules for preparing training and validation data and preparation for the image to be predicted.  
-classifier.py contains modules to build and train the model and run a prediction.  
-save_load_model.py contains mdolues to save and load the checkpoint.  
-display_results.py contains modules to display the prediction results to the user.  
+* get_input_args.py contains modules to accept inputs from the user via the command line.  
+* prepare_data.py contains modules for preparing training and validation data and preparation for the image to be predicted.  
+* classifier.py contains modules to build and train the model and run a prediction.  
+* save_load_model.py contains mdolues to save and load the checkpoint.  
+* display_results.py contains modules to display the prediction results to the user.  
