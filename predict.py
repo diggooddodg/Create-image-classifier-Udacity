@@ -28,7 +28,7 @@ def main():
     top_probs, top_classes = predict(predict_arg.image_path, model, predict_arg.top_k, predict_arg.gpu)
 
     # Display results
-    display_prediction(predict_arg.image_path, top_classes, top_probs, predict_arg.category_names)
+    display_prediction(top_classes, top_probs, predict_arg.category_names)
 
 # Call to main function to run the program
 if __name__ == "__main__":
