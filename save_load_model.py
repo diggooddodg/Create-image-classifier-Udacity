@@ -1,5 +1,5 @@
 # DATE CREATED: 2 May 2024                               
-# REVISED DATE: 
+# REVISED DATE: 9 May 2024
 # PURPOSE: To save models to and  load models from checkpoint files.
 #          *****List functions in this file
 #          Options:
@@ -15,12 +15,12 @@ from torchvision import models
 from torch import optim
 
 # save checkpoint
-def save_checkpoint(arch, model, cat_to_name, optimizer, epochs, save_dir):
+def save_checkpoint(arch, model, optimizer, epochs, save_dir, class_to_idx):
     
-    # define the class to indices map
-    model.class_to_idx = cat_to_name
+    # define the class to output indices map
+    model.class_to_idx = class_to_idx
     
-    checkpoint = {'architecture': 'vgg16',
+    checkpoint = {'architecture': arch,
                   'classifier': model.classifier,
                   'class_to_idx': model.class_to_idx,
                   'state_dict': model.state_dict(),

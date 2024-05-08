@@ -1,5 +1,5 @@
 # DATE CREATED: 2 May 2024                               
-# REVISED DATE: 
+# REVISED DATE: 9 May 2024
 # PURPOSE: This file contains functions that will:
 #           a) Create a classifier model and 
 #           b) Train a classifier model
@@ -16,37 +16,64 @@
 import torch
 from torch import nn
 from torch import optim
-from torchvision import datasets, transforms, models
-from collections import OrderedDict
+from torchvision import models
 import time
 
 # Import local functions
 from prepare_data import process_image
 
 # get pretrained model and add custom classifier
-def create_model(arch):
-    model = models.arch(pretrained=True)
+def create_model(arch, hidden_units):
+    
+    # use pretrained model per user inputs  
+    # seen the following code when Googling but Udacity recommends stricter conditional structure as below
+    #       exec(f"model = models.{arch}(pretrained=True)")
+    #       to get in_features once model has been defined: in_features = model.classifier.in_features
+
+    if arch == "vgg11":
+        model = torchvision.models.vgg11(pretrained=True)
+        in_features = 25088
+    elif arch == "vgg13":
+        model = torchvision.models.vgg13(pretrained=True)
+        in_features = 25088
+    elif arch == "vgg16":
+        model = torchvision.models.vgg16(pretrained=True)
+        in_features = 25088
+    elif arch ==  "vgg19":
+        model = torchvision.models.vgg19(pretrained=True)
+        in_features = 25088
+    elif arch == 'densenet121':
+        model = models.densenet121(pretrained=True)
+        in_features = 1024
+    elif arch == 'alexnet':
+        model = models.alexnet(pretrained=True)   
+        in_features=9216   
    
     # Freeze parameters in the pre-trained model so we don't backprop through them
     for param in model.parameters():
         param.requires_grad = False
 
-    #update the classifier of the pre-trained model with a classifier that has 102 outputs and softmax function
-    classifier = nn.Sequential(OrderedDict([('fc1', nn.Linear(25088, 4096)),
-                                            ('relu', nn.ReLU()),
-                                            ('dropout', nn.Dropout(p=0.2, inplace=False)),
-                                            ('fc2', nn.Linear(4096, 102)),
-                                            ('output', nn.LogSoftmax(dim=1))
-                                            ])) 
+    # Update the classifier of the pre-trained model. 
+    # Use in-features, hidden_units arguments. Specify 102 outputs and softmax output function
+        
+    classifier = nn.Sequential(nn.Linear(in_features, hidden_units),
+                               nn.ReLU(),
+                               nn.Dropout(0.5),
+                               nn.Linear(hidden_units, 102),
+                               nn.LogSoftmax(dim=1))
+    
     model.classifier = classifier
-
+    
     return model
 
 # train a model
-def train_model(model, learning_rate, epochs, trainloader, validationloader):
+def train_model(model, learning_rate, epochs, trainloader, validationloader, gpu):
     
-    # Use GPU if it's available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # Use GPU if it has been selected and is available
+    if gpu:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    else:
+        device = torch.device("cpu")
     model.to(device)
 
     #define the loss function
@@ -130,6 +157,7 @@ def predict(image_path, model, top_k, gpu):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:
         device = torch.device("cpu")
+    model.to(device)
     
     # Convert the NumPy array to a PyTorch tensor and move to device
     image_tensor = torch.tensor(image)
@@ -148,6 +176,17 @@ def predict(image_path, model, top_k, gpu):
         
     #get top classes for this image
     probs = torch.exp(logps)
-    top_probs, top_classes = probs.topk(top_k, dim = 1)
+    top_probs, top_indices = probs.topk(top_k, dim = 1)  
+    
+    #convert probabilities and indices from tensor to numpy
+    np_top_probs, np_top_indices = top_probs.data.cpu().numpy()[0], top_indices.data.cpu().numpy()[0]
+        
+    #convert output indices to classes 
+    # class_to_idx dictionary has key = class and value = index 
+    # so first need to create an inverse of the class_to_idx dictionary
+    idx_to_class = {x: y for y, x in model.class_to_idx.items()}
+    
+    # use idx_to_class dictionary to find top classes from the top output indices
+    top_classes = [idx_to_class[x] for x in np_top_indices] 
 
-    return top_probs, top_classes 
+    return np_top_probs, top_classes

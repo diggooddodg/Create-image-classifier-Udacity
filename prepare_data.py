@@ -1,5 +1,5 @@
 # DATE CREATED: 2 May 2024                               
-# REVISED DATE: 
+# REVISED DATE: 9 May 2024
 # PURPOSE: To prepare data used to:
 #          a) train a new network and 
 #          b) perform predictions on the trained network.
@@ -14,7 +14,6 @@
 # Import libraries
 import torch
 from torchvision import datasets, transforms
-import time
 import numpy as np
 import json
 from PIL import Image 
@@ -44,7 +43,10 @@ def get_train_data(data_directory):
     trainloader = torch.utils.data.DataLoader(train_data, batch_size=102, shuffle=True)
     validationloader = torch.utils.data.DataLoader(validation_data, batch_size=102)
 
-    return trainloader, validationloader
+    #get class to index dictionary
+    class_to_idx = train_data.class_to_idx
+
+    return trainloader, validationloader, class_to_idx
 
 # get dictionary that maps categories to names
 def get_mapping(category_names):

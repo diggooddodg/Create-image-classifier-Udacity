@@ -1,6 +1,6 @@
 # PROGRAMMER: Ben Lepper  
 # DATE CREATED: 3 May 2024                               
-# REVISED DATE: 
+# REVISED DATE: 9 May 2024
 # PURPOSE: Use a trained network to predict the flower name for given an input image
 #          User will specify a single image and the flower name and class probability will be returned.
 #          Basic command line usage: python predict.py /path/to/image checkpoint
@@ -15,20 +15,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Import local functions
-from prepare_data import process_image
-
-# format prediction results ready for display
-def format_prediction_results(top_probs, top_classes, cat_to_name):
-       
-    #convert class indexes to flower names and store as a list for matplotlib
-    flower_names = []
-    for flower_idx in top_classes[0].tolist():
-        flower_names.append(cat_to_name.get(str(flower_idx), f"Index {flower_idx} not in dictionary"))
-            
-    #convert top probabilities to a list for matplotlib
-    top_probs_list = top_probs[0].tolist()
-    
-    return flower_names, top_probs_list 
+from prepare_data import process_image, get_mapping
 
 # transform and display numpy image
 def imshow(image, ax=None, title=None):
@@ -53,20 +40,22 @@ def imshow(image, ax=None, title=None):
     return ax
 
 # display top predicted image and graph of top_k probabilities
-def display_prediction(image_path, flower_names, top_probs, top_classes, cat_to_name):
+def display_prediction(image_path, top_classes, top_probs, category_names):  
+    
+    #convert classes to flower names
+    cat_to_name = get_mapping(category_names)
+    flower_names = [ cat_to_name[x] for x in top_classes ]
+    
     #display the image
     processed_image = process_image(image_path)
     imshow(processed_image)
     plt.title(f"Top predicted flower: {flower_names[0]}")
 
     #display graph of top 5 probable names
-    
-    #format results ready for display
-    flower_names, top_probs_list = format_prediction_results(top_probs, top_classes, cat_to_name)
-    
+       
     # define x and y values 
     x = flower_names
-    y = top_probs_list
+    y = top_probs
 
     # Set graph size
     plt.figure(figsize=(5, 5))
