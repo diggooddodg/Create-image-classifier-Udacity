@@ -19,7 +19,7 @@ def main():
     trainloader, validationloader, class_to_idx = get_train_data(train_arg.data_directory)
     
     # Initialise and train model
-    model = create_model(train_arg.arch)
+    model = create_model(train_arg.arch, train_arg.hidden_units)
     model, optimizer = train_model(model, train_arg.learning_rate, train_arg.epochs, trainloader, validationloader, train_arg.gpu)
 
     # Save checkpoint

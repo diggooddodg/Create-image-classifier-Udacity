@@ -14,6 +14,7 @@
 
 # import python modules
 import torch
+import torchvision
 from torch import nn
 from torch import optim
 from torchvision import models

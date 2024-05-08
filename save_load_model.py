@@ -45,7 +45,7 @@ def load_checkpoint(checkpoint_filename):
     # Attach mapping of classes to indices
     model.class_to_idx = checkpoint['class_to_idx']
     
-    #initialise and rebuild the optimiser
+    #initialise and rebuild the optimiser in case further training is done
     optimizer = optim.Adam(model.classifier.parameters(), lr=0.003)
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     
