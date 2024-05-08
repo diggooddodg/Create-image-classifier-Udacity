@@ -40,7 +40,7 @@ def get_input_args_train():
     parser.add_argument("data_directory", type=str, help="directory containing training data")
 
     # Create optional command line arguments as mentioned above using add_argument() from ArguementParser method
-    parser.add_argument('--save_dir', type = str, default = 'save_directory/', help = 'directory in which checkpint will be saved')
+    parser.add_argument('--save_dir', type = str, default = 'save_directory/checkpoint1', help = 'directory in which checkpint will be saved')
     parser.add_argument('--arch', type = str, default = 'vgg16', help = 'Model Architecture') 
     parser.add_argument('--gpu', type = bool, default = True, help = 'gpu for training - true or false')
     parser.add_argument('--learning_rate', type = float, default = 0.01, help = 'Learning rate')
