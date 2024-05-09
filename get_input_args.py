@@ -22,11 +22,11 @@ def get_input_args_train():
       1. Data directory 
     Command line arguments - optional: 
       1. Directory to save checkpoint as --save_dir with default value 'save_directory'
-      2. Model Architecture as --arch with default value 'vgg13'
+      2. Model Architecture as --arch with default value 'vgg11'
       3. Use GPU for inference as --gpu with default value 'True'
       4. Learning rate as --learning_rate with default value 0.01
-      5. Hidden units as --hidden_units with default value 512
-      6. Epochs as --epochs with default value 5
+      5. Hidden units as --hidden_units with default value 4096
+      6. Epochs as --epochs with default value 2
     This function returns these arguments as an ArgumentParser object.
     Parameters:
      None - simply using argparse module to create & store command line arguments
@@ -41,11 +41,11 @@ def get_input_args_train():
 
     # Create optional command line arguments as mentioned above using add_argument() from ArguementParser method
     parser.add_argument('--save_dir', type = str, default = 'save_directory/checkpoint1', help = 'directory in which checkpint will be saved')
-    parser.add_argument('--arch', type = str, default = 'vgg16', help = 'Model Architecture') 
+    parser.add_argument('--arch', type = str, default = 'vgg11', help = 'Model Architecture') 
     parser.add_argument('--gpu', type = bool, default = True, help = 'gpu for training - true or false')
     parser.add_argument('--learning_rate', type = float, default = 0.01, help = 'Learning rate')
     parser.add_argument('--hidden_units', type = int, default = 4096, help = 'Hidden units') 
-    parser.add_argument('--epochs', type = int, default = 5, help = 'Epochs')
+    parser.add_argument('--epochs', type = int, default = 2, help = 'Epochs')
     
     # Replace None with parser.parse_args() parsed argument collection that 
     # you created with this function 
