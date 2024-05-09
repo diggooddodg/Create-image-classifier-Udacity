@@ -20,7 +20,7 @@ def display_prediction(top_classes, top_probs, category_names):
     cat_to_name = get_mapping(category_names)
     flower_names = [ cat_to_name[x] for x in top_classes ]
 
-    print(f"Top prediction is: {flower_names[0]}/n")
-    print(f"Top predictions are: {flower_names} /n and their probabilities are{top_probs}")
+    print(f"Top prediction is: {flower_names[0]}\n Top predictions are: {flower_names} \n 
+          Top prediction probabilities are{top_probs}")
            
    
