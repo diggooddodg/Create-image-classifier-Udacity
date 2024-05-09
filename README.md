@@ -12,20 +12,21 @@ train.py can be executed to build and train the image classifier
 ##### Mandatory argument
 The user will need to specify one mandatory argument 'data_directory' contating the path to the training data directory. 
 ##### Optional arguments:
---data_directory: the saving directory. Default is 'save_directory/'.  
---arch: the user can choose which architecture to use for the neural network. The default architecture is vgg13.  
+--data_directory: the saving directory and filename for saving the checkpoint. Default is 'save_directory/checkpoint1'.  
+--arch: the user can choose which architecture to use for the neural network. The default architecture is vgg11.  
+--GPU: Allows the user to specifify if GPU will be used. Default is GPU = True.  
 --learning_rate: sets the learning rate for gradient descent: default is 0.01.  
---hidden_units: an int specifying how many neurons an extra hidden-layer will contain if so chosen. Default is 512.  
---epochs: specifies the number of epochs as integer. Set to 20 by default.  
+--hidden_units: an int specifying how many neurons the hidden-layer in the classifier will contain if so chosen. Default is 4096.  
+--epochs: specifies the number of epochs as integer. Set to 2 by default.  
 
 ### Prediction
 predict.py can be executed to predict a flower type for a single image.  
 ##### Mandatory arguments:
-The user will need to specify the the path to the input image and the checkpoint filename.
+The user will need to specify the the path to the input image and the checkpoint filename to be loaded.
 ##### Optional arguments:
 --top_k: let's the user specify the numer of top K-classes to output. Default is 3.  
+--GPU: Allows the user to specifify if GPU will be used. Default is GPU = True.  
 --category_names: allows user to provide path of JSON file mapping categories to names. Default is cat_to_name.json.  
---GPU: Allows the user to specifify GPU = True if a GPU is available. Default is GPU = True.  
 
 ### Additional files
 train.py and predict.py use modules from the following files:  
