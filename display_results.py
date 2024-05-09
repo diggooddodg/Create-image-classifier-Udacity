@@ -10,6 +10,9 @@
 #               * Use GPU for inference: python predict.py input checkpoint --gpu
 #          This file is one of several used for part 2 of the Udacity "Create your own Image classifier" project.
       
+# Import python libraries
+import numpy as np
+
 # Import local functions
 from prepare_data import get_mapping
 
@@ -22,6 +25,7 @@ def display_prediction(top_classes, top_probs, category_names):
 
     print(f"Top prediction is: {flower_names[0]}")
     print(f"Top predictions are: {flower_names}")
-    print(f"Top prediction probabilities are{top_probs}")
+    with np.printoptions(precision=5, suppress=True):
+        print(f"Top prediction probabilities are{top_probs}")
            
    
